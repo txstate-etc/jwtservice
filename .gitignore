@@ -1,4 +1,4 @@
-keys/jwtsecret*
+keys/jwtservice*
 run.sh
 
 .DS_Store
