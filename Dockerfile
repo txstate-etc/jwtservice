@@ -12,10 +12,9 @@ ENV APACHE_LOG_DIR /var/log/apache2
 RUN a2enmod ssl
 
 RUN mkdir /ssl
-RUN openssl req -newkey rsa:4096 -nodes -keyout /ssl/dispatch.key.pem -out /ssl/jwtservice.csr \
-    -subj "/C=US/ST=Texas/L=San\ Marcos/O=Texas\ State\ University/CN=localhost"
-RUN openssl x509 -req -days 365 -in /ssl/jwtservice.csr -signkey /ssl/dispatch.key.pem -out /ssl/dispatch.cert.pem
- 
+RUN openssl req -newkey rsa:4096 -nodes -keyout /ssl/jwtservice.key.pem -out /ssl/jwtservice.csr -subj "/CN=localhost"
+RUN openssl x509 -req -days 365 -in /ssl/jwtservice.csr -signkey /ssl/jwtservice.key.pem -out /ssl/jwtservice.cert.pem
+
 COPY cmd.sh /cmd.sh
 COPY public/ /var/www/html/
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
