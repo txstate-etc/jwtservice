@@ -20,6 +20,7 @@ COPY public/ /var/www/html/
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD https://raw.githubusercontent.com/txstate-etc/SSLConfig/master/SSLConfig-TxState.conf /etc/apache2/conf-enabled/ZZZ-SSLConfig-TxState.conf
 RUN rm /var/www/html/index.html
+RUN a2disconf security
 
 EXPOSE 80
 EXPOSE 443
