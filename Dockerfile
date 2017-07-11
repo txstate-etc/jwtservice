@@ -24,6 +24,8 @@ ADD https://raw.githubusercontent.com/txstate-etc/SSLConfig/master/SSLConfig-TxS
 RUN rm /var/www/html/index.html
 RUN a2disconf security
 
+RUN apt-get update && apt-get install libcgi-fast-perl libapache2-mod-fcgid -y
+
 EXPOSE 80
 EXPOSE 443
 
