@@ -10,12 +10,14 @@ ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 RUN a2enmod ssl
+RUN a2enmod authnz_ldap
 
 RUN mkdir /ssl
 RUN openssl req -newkey rsa:4096 -nodes -keyout /ssl/jwtservice.key.pem -out /ssl/jwtservice.csr -subj "/CN=localhost"
 RUN openssl x509 -req -days 365 -in /ssl/jwtservice.csr -signkey /ssl/jwtservice.key.pem -out /ssl/jwtservice.cert.pem
 
 COPY cmd.sh /cmd.sh
+COPY entrypoint.sh /entrypoint.sh
 COPY public/ /var/www/html/
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD https://raw.githubusercontent.com/txstate-etc/SSLConfig/master/SSLConfig-TxState.conf /etc/apache2/conf-enabled/ZZZ-SSLConfig-TxState.conf
@@ -24,4 +26,6 @@ RUN a2disconf security
 
 EXPOSE 80
 EXPOSE 443
+
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/cmd.sh"]
