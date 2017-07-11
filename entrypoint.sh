@@ -10,6 +10,6 @@ perl -i -pe 's/\Q{{ldap_password}}\E/$ENV{JWT_LDAP_PASSWORD}/' $DIR/$ORIGINAL
 perl -i -pe 's/\Q{{ldap_dn}}\E/$ENV{JWT_LDAP_DN}/' $DIR/$ORIGINAL
 perl -i -pe 's/\Q{{ldap_url}}\E/$ENV{JWT_LDAP_URL}/' $DIR/$ORIGINAL
 
-# unset LDAP_PASSWORD LDAP_DN LDAP_URL
+unset LDAP_PASSWORD LDAP_DN LDAP_URL
 
 exec "$@"
