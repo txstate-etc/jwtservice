@@ -15,7 +15,9 @@ while ( CGI::Fast->new ) {
 	$expires->add(minutes => 5);
 	my $formatter = DateTime::Format::Strptime->new(pattern => '%Y-%m-%dT%H:%M:%S%z');
 	my $expirestring = $formatter->format_datetime($expires);
+	my $user_id = $q->remote_user();
 	my $data = {
+		user_id => $user_id,
 		expires => $expirestring
 	};
 	my $token = encode_jwt(payload=>$data, key=>\$jwt_secret, alg=>'RS256');
