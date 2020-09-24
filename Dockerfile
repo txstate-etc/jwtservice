@@ -11,6 +11,7 @@ ENV APACHE_RUN_GROUP www-data
 ENV APACHE_LOG_DIR /var/log/apache2
 RUN a2enmod ssl
 RUN a2enmod authnz_ldap
+RUN a2enmod headers
 
 RUN mkdir /ssl
 RUN openssl req -newkey rsa:4096 -nodes -keyout /ssl/jwtservice.key.pem -out /ssl/jwtservice.csr -subj "/CN=localhost"
